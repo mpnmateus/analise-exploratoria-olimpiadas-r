@@ -62,3 +62,13 @@ sum(is.na(olympics_ajustado$Result))
 
 # 9) Mostra as linhas em que Result ficou NA
 olympics_ajustado[is.na(olympics_ajustado$Result), ]
+
+
+olympics_100m_men_gold <- olympics %>% filter(Event == "100M Men", Medal == "G")
+
+olympics_100m_women_gold <- olympics %>% filter(Event == "100M Women", Medal == "G")
+
+str(olympics_100m_men_gold)
+str(olympics_100m_women_gold)
+
+olympics_100m_men_gold$Result <- as.double(olympics_100m_men_gold$Result)
