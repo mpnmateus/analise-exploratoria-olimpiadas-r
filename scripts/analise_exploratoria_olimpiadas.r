@@ -163,3 +163,41 @@ grafico_100m_women <- plot_ly(
   )
 
 grafico_100m_women
+
+# 5) Adiciona uma coluna para identificar o grupo
+olympics_100m_men_gold$Categoria <- "Masculino"
+olympics_100m_women_gold$Categoria <- "Feminino"
+
+# 6) Junta as duas bases
+olympics_100m_comparativo <- rbind(
+  olympics_100m_men_gold,
+  olympics_100m_women_gold
+)
+
+# 7) Gráfico comparativo
+grafico_comparativo <- plot_ly(
+  data = olympics_100m_comparativo,
+  x = ~Year,
+  y = ~Result,
+  color = ~Categoria,
+  type = "scatter",
+  mode = "lines+markers",
+  text = ~paste(
+    "Categoria:", Categoria,
+    "<br>Ano:", Year,
+    "<br>Atleta:", Name,
+    "<br>País:", Nationality,
+    "<br>Tempo:", Result, "s",
+    "<br>Local:", Location
+  ),
+  hoverinfo = "text"
+) %>% 
+  layout(
+    title = "Comparação da evolução dos tempos olímpicos - 100m masculino e feminino",
+    xaxis = list(title = "Ano"),
+    yaxis = list(title = "Tempo (segundos)")
+  )
+
+grafico_comparativo
+
+htmlwidgets::saveWidget(grafico_comparativo, "grafico_100m_comparativo.html")
