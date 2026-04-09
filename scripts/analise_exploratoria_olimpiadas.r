@@ -139,3 +139,27 @@ grafico_100m_men <- plot_ly(
   )
 
 grafico_100m_men
+
+# 4) Gráfico interativo - 10mm feminino
+grafico_100m_women <- plot_ly(
+  data = olympics_100m_women_gold,
+  x = ~Year,
+  y = ~Result,
+  type = "scatter",
+  mode = "lines+markers",
+  text = ~paste(
+    "Ano:", Year,
+    "<br>Atleta:", Name,
+    "<br>País:", Nationality,
+    "<br>Tempo:", Result, "s",
+    "<br>Local:", Location
+  ),
+  hoverinfo = "text"
+) %>% 
+  layout(
+    title = "Evolução do tempo das campeãs olímpicas - 100m feminino", 
+    xaxis = list(title = "Ano"),
+    yaxis = list(title = "Tempo (segundos)")
+  )
+
+grafico_100m_women
