@@ -36,7 +36,8 @@ summary(olympics)
 # Bloco 2: ajuste dos dados
 # =========================================================
 
-# 1) Carrega o pacote dplyr
+# 1) Instala e carrega o pacote dplyr
+#install.packages("dplyr")
 library(dplyr)
 
 # 2) Inspeciona alguns valores da coluna Result
@@ -104,3 +105,37 @@ olympics_100m_women_gold <- olympics_100m_women_gold %>% arrange(Year)
 # 8) Confere o resultado final
 olympics_100m_men_gold
 olympics_100m_women_gold
+
+# =========================================================
+# Bloco 4: apresentação dos resultados com gráficos
+# =========================================================
+
+# 1) Instala o plotly (rode apenas uma vez, se ainda não tiver instalado)
+#install.packages("plotly")
+
+# 2) Carrega o pacote
+library(plotly)
+
+# 3) Gráfico intrativo - 100m masculino
+grafico_100m_men <- plot_ly(
+  data = olympics_100m_men_gold,
+  x = ~Year,
+  y = ~Result,
+  type = "scatter",
+  mode = "lines+markers",
+  text = ~paste(
+    "Ano:", Year,
+    "<br>Atleta:", Name,
+    "<br>País:", Nationality,
+    "<br>Tempo:", Result, "s",
+    "<br>Local:", Location
+  ),
+  hoverinfo = "text"
+) %>%
+  layout (
+    title = "Evolução do tempo dos campeões olímpicos - 100m masculino",
+    xaxis = list(title = "Ano"),
+    yaxis = list(title = "Tempo (segundos)")
+  )
+
+grafico_100m_men
